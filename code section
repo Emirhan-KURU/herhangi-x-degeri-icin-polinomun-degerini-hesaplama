@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double PolinomHesapla(double *p, int N, double x);
+int main()
+{
+    double *p,N,X,sonuc;// N = polinomun katsayisi, X = cozum degeri;
+    int i;
+
+    printf("Polinomun kat sayisini giriniz:\t");
+    scanf("%lf",&N);
+    printf("\n"); 
+    N = N+1; 
+    p = (double*) malloc(N*sizeof(double));
+
+    for(i=0;i<N;p++,i++){
+        printf("a%d degerini giriniz:\t",i);
+        scanf("%lf",p);}
+    for(i=0;i<N;p--,i++);
+
+    printf("\nPolinom hangi deger icin cozulsun:\t");
+    scanf("%lf",&X);
+
+    sonuc = PolinomHesapla(p,N,X);
+    printf("= %.lf",sonuc);
+    return 0;
+}
+
+double PolinomHesapla(double *p, int N, double x){
+    double Sonuc=*p;
+    int i;
+
+    for(i=1,p=p+1;i<N;i++,p++){
+        Sonuc = Sonuc + *p*pow(x,i); 
+    }for(i=0;i<N;p--,i++);
+
+    printf("\n%.lf + ",*p); 
+    for(p+=1,i=1;i<N;i++,p++){
+        if(i<N-1)
+        printf("%.lf*%.lf^%d + ",*p,x,i);
+        else                            
+        printf("%.lf*%.lf^%d ",*p,x,i);
+    }
+    return Sonuc;
+}
